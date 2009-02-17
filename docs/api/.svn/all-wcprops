@@ -1,0 +1,347 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/134/trunk/python/docs/api
+END
+frames.html
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/79/trunk/python/docs/api/frames.html
+END
+toc-scapi.json-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.json-module.html
+END
+scapi.User-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.User-class.html
+END
+scapi.json.JsonWriter-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json.JsonWriter-class.html
+END
+scapi.Asset-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.Asset-class.html
+END
+scapi.Event-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.Event-class.html
+END
+module-tree.html
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/79/trunk/python/docs/api/module-tree.html
+END
+toc-scapi.authentication-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.authentication-module.html
+END
+scapi.ApiConnector-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.ApiConnector-class.html
+END
+scapi.json._StringGenerator-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json._StringGenerator-class.html
+END
+scapi.config-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.config-module.html
+END
+scapi.SCRedirectHandler-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.SCRedirectHandler-class.html
+END
+identifier-index.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/79/trunk/python/docs/api/identifier-index.html
+END
+help.html
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/79/trunk/python/docs/api/help.html
+END
+crarr.png
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/79/trunk/python/docs/api/crarr.png
+END
+scapi.authentication.OAuthAuthenticator-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.authentication.OAuthAuthenticator-class.html
+END
+scapi-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/79/trunk/python/docs/api/scapi-pysrc.html
+END
+scapi.UnknownContentType-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.UnknownContentType-class.html
+END
+toc-scapi.tests.test_connect-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.tests.test_connect-module.html
+END
+scapi.util-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.util-module.html
+END
+scapi.tests.test_oauth-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.tests.test_oauth-module.html
+END
+class-tree.html
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/79/trunk/python/docs/api/class-tree.html
+END
+scapi.json-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json-pysrc.html
+END
+toc-scapi-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi-module.html
+END
+toc-scapi.tests-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.tests-module.html
+END
+scapi.RESTBase-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.RESTBase-class.html
+END
+toc-scapi.config-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.config-module.html
+END
+scapi.Scope-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.Scope-class.html
+END
+api-objects.txt
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/79/trunk/python/docs/api/api-objects.txt
+END
+scapi.authentication-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.authentication-pysrc.html
+END
+scapi.tests.test_oauth-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.tests.test_oauth-pysrc.html
+END
+toc-scapi.util-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.util-module.html
+END
+scapi-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/79/trunk/python/docs/api/scapi-module.html
+END
+scapi.json.WriteException-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json.WriteException-class.html
+END
+scapi.tests-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.tests-module.html
+END
+toc-scapi.tests.test_oauth-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/79/trunk/python/docs/api/toc-scapi.tests.test_oauth-module.html
+END
+toc.html
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/79/trunk/python/docs/api/toc.html
+END
+scapi.tests.test_connect-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/134/trunk/python/docs/api/scapi.tests.test_connect-pysrc.html
+END
+scapi.authentication.OAuthSignatureMethod_HMAC_SHA1-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.authentication.OAuthSignatureMethod_HMAC_SHA1-class.html
+END
+scapi.json-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json-module.html
+END
+scapi.authentication.BasicAuthenticator-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.authentication.BasicAuthenticator-class.html
+END
+epydoc.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/79/trunk/python/docs/api/epydoc.js
+END
+scapi.tests-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.tests-pysrc.html
+END
+scapi.authentication-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.authentication-module.html
+END
+scapi.config-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.config-pysrc.html
+END
+redirect.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/79/trunk/python/docs/api/redirect.html
+END
+scapi.Comment-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.Comment-class.html
+END
+scapi.json.ReadException-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json.ReadException-class.html
+END
+scapi.json.JsonReader-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.json.JsonReader-class.html
+END
+scapi.Track-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.Track-class.html
+END
+epydoc.css
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/79/trunk/python/docs/api/epydoc.css
+END
+scapi.InvalidMethodException-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.InvalidMethodException-class.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/79/trunk/python/docs/api/index.html
+END
+toc-everything.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/79/trunk/python/docs/api/toc-everything.html
+END
+scapi.util-pysrc.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.util-pysrc.html
+END
+scapi.NoResultFromRequest-class.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.NoResultFromRequest-class.html
+END
+scapi.tests.test_connect-module.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/79/trunk/python/docs/api/scapi.tests.test_connect-module.html
+END

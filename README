@@ -1,0 +1,22 @@
+
+
+Running tests
+-------------
+
+Use::
+
+  host:~/SoundCloudAPI deets$ nosetests -sw scapi/tests/ test_connect:test_setting_permissions
+
+to run a specific test, or::
+
+  host:~/SoundCloudAPI deets$ nosetests -sw scapi/tests/ test_connect
+
+to run the whole suite.
+
+
+Creating the API-docs
+---------------------
+
+Do::
+   epydoc -v --name="SoundCloud API" --html -o docs/api scapi --exclude="os|mimetypes|urllib2|exceptions|mimetools"
+

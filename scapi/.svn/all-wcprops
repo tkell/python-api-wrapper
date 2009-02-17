@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/135/trunk/python/scapi
+END
+json.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/79/trunk/python/scapi/json.py
+END
+util.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/79/trunk/python/scapi/util.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/134/trunk/python/scapi/__init__.py
+END
+authentication.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/135/trunk/python/scapi/authentication.py
+END
+config.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/79/trunk/python/scapi/config.py
+END
+MultipartPostHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/79/trunk/python/scapi/MultipartPostHandler.py
+END
