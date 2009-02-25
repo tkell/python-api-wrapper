@@ -19,13 +19,23 @@
 ##    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import base64
-import urllib2
 import time, random
 import urlparse
 import hmac
 import hashlib
 from scapi.util import escape
 import logging
+
+
+USE_DOUBLE_ESCAPE_HACK = True
+"""
+There seems to be an uncertainty on the way
+parameters are to be escaped. For now, this
+variable switches between two escaping mechanisms.
+
+If True, the passed parameters - GET or POST - are
+escaped *twice*.
+"""
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +47,14 @@ class OAuthSignatureMethod_HMAC_SHA1(object):
         return 'HMAC-SHA1'
 
     def build_signature(self, request, parameters, consumer_secret, token_secret, oauth_parameters):
+        if logger.level == logging.DEBUG:
+            logger.debug("request: %r", request)
+            logger.debug("parameters: %r", parameters)
+            logger.debug("consumer_secret: %r", consumer_secret)
+            logger.debug("token_secret: %r", token_secret)
+            logger.debug("oauth_parameters: %r", oauth_parameters)
+
+            
         temp = {}
         temp.update(oauth_parameters)
         for p in self.FORBIDDEN:
@@ -55,14 +73,17 @@ class OAuthSignatureMethod_HMAC_SHA1(object):
             key += token_secret
         raw = '&'.join(sig)
         logger.debug("raw basestring: %s", raw)
+        logger.debug("key: %s", key)
         # hmac object
         hashed = hmac.new(key, raw, hashlib.sha1)
         # calculate the digest base 64
         signature = escape(base64.b64encode(hashed.digest()))
         return signature
 
+
     def get_normalized_http_method(self, request):
         return request.get_method().upper()
+
 
     # parses the url and rebuilds it to be scheme://host/path
     def get_normalized_http_url(self, request):
@@ -70,6 +91,7 @@ class OAuthSignatureMethod_HMAC_SHA1(object):
         parts = urlparse.urlparse(url)
         url_string = '%s://%s%s' % (parts.scheme, parts.netloc, parts.path)
         return url_string
+
 
     def get_normalized_parameters(self, params):
         if params is None:
@@ -90,14 +112,22 @@ class OAuthSignatureMethod_HMAC_SHA1(object):
                 values = [str(v) for v in values]
             if isinstance(values, basestring):
                 values = [values]
+            if USE_DOUBLE_ESCAPE_HACK and not key.startswith("ouath"):
+                key = escape(key)                
             for v in values:
                 v = v.encode("utf-8")
                 key = key.encode("utf-8")
+                if USE_DOUBLE_ESCAPE_HACK and not key.startswith("oauth"):
+                    # this is a dirty hack to make the
+                    # thing work with the current server-side
+                    # implementation. Or is it by spec? 
+                    v = escape(v)
                 key_values.append(escape("%s=%s" % (key, v)))
         # sort lexicographically, first after key, then after value
         key_values.sort()
         # combine key value pairs in string
         return escape('&').join(key_values)
+
 
 class OAuthAuthenticator(object):
     OAUTH_API_VERSION = '1.0'
@@ -109,7 +139,8 @@ class OAuthAuthenticator(object):
         self._signature_method = signature_method
         random.seed()
 
-    def augment_request(self, req, parameters):
+
+    def augment_request(self, req, parameters, use_multipart=False):
         oauth_parameters = {
             'oauth_consumer_key': self._consumer,
             'oauth_timestamp': self.generate_timestamp(),
@@ -121,10 +152,10 @@ class OAuthAuthenticator(object):
         if self._token is not None:
             oauth_parameters['oauth_token'] = self._token
 
-        # When we have a different encoding then urlencode, parameters should not be
-        # a part of base signature string
-        if (req.get_header("Content-Type") != "application/x-www-form-urlencoded"):  
-          parameters = None
+        # in case we upload large files, we don't
+        # sign the request over the parameters
+        if use_multipart:
+            parameters = None
 
         oauth_parameters['oauth_signature'] = self._signature_method.build_signature(req, 
                                                                                      parameters, 
@@ -141,6 +172,7 @@ class OAuthAuthenticator(object):
 
     def generate_nonce(self, length=8):
         return ''.join(str(random.randint(0, 9)) for i in range(length))
+
 
 class BasicAuthenticator(object):
     

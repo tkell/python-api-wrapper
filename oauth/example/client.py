@@ -7,30 +7,30 @@ import oauth.oauth as oauth
 import webbrowser
 from scapi import util
 
-SERVER = '192.168.2.31'
-PORT = 3001
+SERVER = 'sandbox-soundcloud.com'
+PORT = 80
 
-REQUEST_TOKEN_URL = 'http://soundcloud.dev:3000/api/oauth/request_token'
-ACCESS_TOKEN_URL = 'http://soundcloud.dev:3000/api/oauth/access_token'
-AUTHORIZATION_URL = 'http://soundcloud.dev:3000/api/oauth/authorize'
+REQUEST_TOKEN_URL = 'http://api.' + SERVER + '/oauth/request_token'
+ACCESS_TOKEN_URL  = 'http://api.' + SERVER + '/oauth/access_token'
+AUTHORIZATION_URL = 'http://'     + SERVER + '/oauth/authorize'
 
-CALLBACK_URL = 'http://printer.example.com/request_token_ready'
-RESOURCE_URL = "http://192.168.2.31:3001/tracks/oauth_show/1"
+CALLBACK_URL = ''
+RESOURCE_URL = "http://api." + SERVER + "/me"
 
 # key and secret granted by the service provider for this consumer application - same as the MockOAuthDataStore
-CONSUMER_KEY = '1nbNOJ7LjzO4fDewyLuQqw'
-CONSUMER_SECRET = 'kJ3JFW4rotQtp3NKCdjM7dOhGUnLU7ePlREVex1DIjQ'
+CONSUMER_KEY    = 'JysXkO8ErA4EluFnF5nWg'
+CONSUMER_SECRET = 'fauVjm61niGckeufkmMvgUo77oWzRHdMmeylJblHk'
 
 # example client using httplib with headers
 class SimpleOAuthClient(oauth.OAuthClient):
 
     def __init__(self, server, port=httplib.HTTP_PORT, request_token_url='', access_token_url='', authorization_url=''):
-        self.server = server
-        self.port = port
+        self.server            = server
+        self.port              = port
         self.request_token_url = request_token_url
-        self.access_token_url = access_token_url
+        self.access_token_url  = access_token_url
         self.authorization_url = authorization_url
-        self.connection = httplib.HTTPConnection("%s:%d" % (self.server, self.port))
+        self.connection        = httplib.HTTPConnection("%s:%d" % (self.server, self.port))
 
     def fetch_request_token(self, oauth_request):
         # via headers

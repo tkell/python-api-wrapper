@@ -306,7 +306,7 @@ class Scope(object):
     def _get_connector(self):
         return self._connector
 
-    def _create_request(self, url, connector, parameters, queryparams, alternate_http_method=None):
+    def _create_request(self, url, connector, parameters, queryparams, alternate_http_method=None, use_multipart=False):
         """
         This method returnes the urllib2.Request to perform the actual HTTP-request.
 
@@ -334,8 +334,8 @@ class Scope(object):
             def has_data(self):
                 return parameters is not None
 
-            def augment_request(self, params):
-                connector.authenticator.augment_request(self, params)
+            def augment_request(self, params, use_multipart=False):
+                connector.authenticator.augment_request(self, params, use_multipart)
 
             @classmethod
             def recreate_request(cls, location):
@@ -349,7 +349,7 @@ class Scope(object):
             all_params.update(queryparams)
         if not all_params:
             all_params = None
-        req.augment_request(all_params)
+        req.augment_request(all_params, use_multipart)
         req.add_header("Accept", "application/json")
         return req
 
@@ -381,6 +381,7 @@ class Scope(object):
 
         You have been warned.
         """
+
         queryparams = {}
         __offset__ = ApiConnector.LIST_LIMIT
         if "__offset__" in kwargs:
@@ -433,7 +434,7 @@ class Scope(object):
         handlers = [redirect_handler]
         if USE_PROXY:
             handlers.append(urllib2.ProxyHandler({'http' : PROXY}))
-        req = self._create_request(url, connector, urlparams, queryparams, alternate_http_method)
+        req = self._create_request(url, connector, urlparams, queryparams, alternate_http_method, use_multipart)
 
         http_method = req.get_method()
         if urlparams is not None:
@@ -826,12 +827,6 @@ class Track(RESTBase):
     """
     KIND = 'tracks'
     ALIASES = ['favorites']
-
-class Asset(RESTBase):
-    """
-    An asset domain object/resource. 
-    """
-    KIND = 'assets'
 
 class Comment(RESTBase):
     """
