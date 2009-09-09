@@ -28,7 +28,10 @@ from scapi.MultipartPostHandler import MultipartPostHandler
 from inspect import isclass
 import urlparse
 from scapi.authentication import BasicAuthenticator
-from scapi.util import escape
+from scapi.util import (
+    escape,
+    MultiDict,
+    )
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -150,7 +153,9 @@ class ApiConnector(object):
             return path[len(self._base)-1:]
         raise InvalidMethodException("Not a valid API method: %s" % method)
 
-    def fetch_request_token(self, url=None):
+
+    
+    def fetch_request_token(self, url=None, oauth_callback="oob", oauth_verifier=None):
         """
         Helper-function for a registered consumer to obtain a request token, as
         used by oauth.
@@ -171,7 +176,7 @@ class ApiConnector(object):
         if url is None:
             url = REQUEST_TOKEN_URL
         req = urllib2.Request(url)
-        self.authenticator.augment_request(req, None)
+        self.authenticator.augment_request(req, None, oauth_callback=oauth_callback, oauth_verifier=oauth_verifier)
         handlers = []
         if USE_PROXY:
             handlers.append(urllib2.ProxyHandler({'http' : PROXY}))
@@ -185,7 +190,7 @@ class ApiConnector(object):
         return key, secret
 
 
-    def fetch_access_token(self):
+    def fetch_access_token(self, oauth_verifier):
         """
         Helper-function for a registered consumer to exchange an access token for
         a request token.
@@ -202,7 +207,8 @@ class ApiConnector(object):
 
         Please note the values passed as token & secret to the authenticator.
         """
-        return self.fetch_request_token(ACCESS_TOKEN_URL)
+        return self.fetch_request_token(ACCESS_TOKEN_URL, oauth_verifier=oauth_verifier)
+    
 
     def get_request_token_authorization_url(self, token):
         """
@@ -306,6 +312,60 @@ class Scope(object):
     def _get_connector(self):
         return self._connector
 
+
+    def oauth_sign_get_request(self, url):
+        """
+        This method will take an arbitrary url, and rewrite it
+        so that the current authenticator's oauth-headers are appended
+        as query-parameters.
+
+        This is used in streaming and downloading, because those content
+        isn't served from the SoundCloud servers themselves.
+
+        A usage example would look like this:
+
+        >>> sca = scapi.Scope(connector)
+        >>> track = sca.tracks(params={
+              "filter" : "downloadable",
+              }).next()
+
+        
+        >>> download_url = track.download_url
+        >>> signed_url = track.oauth_sign_get_request(download_url)
+        >>> data = urllib2.urlopen(signed_url).read()
+
+        """
+        scheme, netloc, path, params, query, fragment = urlparse.urlparse(url)
+
+        req = urllib2.Request(url)
+
+        all_params = {}
+        if query:
+            all_params.update(cgi.parse_qs(query))
+
+        if not all_params:
+            all_params = None
+            
+        self._connector.authenticator.augment_request(req, all_params, False)
+
+        auth_header = req.get_header("Authorization")
+        auth_header = auth_header[len("OAuth  "):]
+
+        query_params = []
+        if query:
+            query_params.append(query)
+
+        for part in auth_header.split(","):
+            key, value = part.split("=")
+            assert key.startswith("oauth")
+            value = value[1:-1]
+            query_params.append("%s=%s" % (key, value))
+
+        query = "&".join(query_params)
+        url = urlparse.urlunparse((scheme, netloc, path, params, query, fragment))
+        return url
+
+
     def _create_request(self, url, connector, parameters, queryparams, alternate_http_method=None, use_multipart=False):
         """
         This method returnes the urllib2.Request to perform the actual HTTP-request.
@@ -353,6 +413,7 @@ class Scope(object):
         req.add_header("Accept", "application/json")
         return req
 
+
     def _create_query_string(self, queryparams):
         """
         Small helpermethod to create the querystring from a dict.
@@ -375,6 +436,7 @@ class Scope(object):
                 h.append("%s=%s" % (key, escape(v)))
         return "?" + "&".join(h)
 
+
     def _call(self, method, *args, **kwargs):
         """
         The workhorse. It's complicated, convoluted and beyond understanding of a mortal being.
@@ -388,6 +450,9 @@ class Scope(object):
             offset = kwargs.pop("__offset__")
             queryparams['offset'] = offset
             __offset__ = offset + ApiConnector.LIST_LIMIT
+
+        if "params" in kwargs:
+            queryparams.update(kwargs.pop("params"))
 
         # create a closure to invoke this method again with a greater offset
         _cl_method = method
@@ -461,6 +526,7 @@ class Scope(object):
         info = handle.info()
         ct = info['Content-Type']
         content = handle.read()
+        logger.debug("Content-type:%s", ct)
         logger.debug("Request Content:\n%s", content)
         if redirect_handler.alternate_method is not None:
             method = connector.normalize_method(redirect_handler.alternate_method)
@@ -523,6 +589,7 @@ class Scope(object):
         If the former, result is a callable that supports the following invocations:
 
          - calling (...), with possible arguments (positional/keyword), return the resulting resource or list of resources.
+           When calling, you can pass a keyword-argument B{params}. This must be a dict or L{MultiDict} and will be used to add additional query-get-parameters.
 
          - invoking append(resource) on it will PUT the resource, making it part of the current resource. Makes
            sense only if it's a collection of course.
@@ -556,12 +623,28 @@ class Scope(object):
                 
         if _name in RESTBase.ALL_DOMAIN_CLASSES:
             cls = RESTBase.ALL_DOMAIN_CLASSES[_name]
+
             class ScopeBinder(object):
                 def new(self, *args, **data):
-                    d = {}
+
+                    d = MultiDict()
                     name = cls._singleton()
+
+                    def unfold_value(key, value):
+                        if isinstance(value, (basestring, file)):
+                            d.add(key, value)
+                        elif isinstance(value, dict):
+                            for sub_key, sub_value in value.iteritems():
+                                unfold_value("%s[%s]" % (key, sub_key), sub_value)
+                        else:
+                            # assume iteration else
+                            for sub_value in value:
+                                unfold_value(key + "[]", sub_value)
+                                
+                        
                     for key, value in data.iteritems():
-                        d['%s[%s]' % (name, key)] = value
+                        unfold_value("%s[%s]" % (name, key), value)
+
                     return scope._call(cls.KIND, **d)
                 
                 def create(self, **data):
@@ -569,6 +652,8 @@ class Scope(object):
 
                 def get(self, id):
                     return cls.get(scope, id)
+
+                
             return ScopeBinder()
         return api_call()
 
@@ -701,8 +786,10 @@ class RESTBase(object):
         return res
 
     def _convert_value(self, value):
-        if isinstance(value, basestring):
+        if isinstance(value, unicode):
             value = value.encode("utf-8")
+        elif isinstance(value, file):
+            pass
         else:
             value = str(value)
         return value
@@ -741,8 +828,8 @@ class RESTBase(object):
            >>> track = user.tracks.new()
            <scapi.Track object at 0x1234>
 
-        @param args: if not empty, a one-element tuple containing the Scope
-        @type args: tuple<Scope>[1]
+        @param scope: if not empty, a one-element tuple containing the Scope
+        @type scope: tuple<Scope>[1]
         @param data: the data
         @type data: dict
         @return: new instance of the resource
@@ -845,6 +932,13 @@ class Playlist(RESTBase):
     A playlist/set domain object/resource
     """
     KIND = 'playlists'
+
+class Group(RESTBase):
+    """
+    A group domain object/resource
+    """
+    KIND = 'groups'
+
 
 
 # this registers all the RESTBase subclasses.

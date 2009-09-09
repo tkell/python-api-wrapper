@@ -23,3 +23,31 @@ import urllib
 def escape(s):
     # escape '/' too
     return urllib.quote(s, safe='')
+
+
+
+
+
+
+class MultiDict(dict):
+
+
+    def add(self, key, new_value):
+        if key in self:
+            value = self[key]
+            if not isinstance(value, list):
+                value = [value]
+                self[key] = value
+            value.append(new_value)
+        else:
+            self[key] = new_value
+
+
+    def iteritemslist(self):
+        for key, value in self.iteritems():
+            if not isinstance(value, list):
+                value = [value]
+            yield key, value
+
+
+    

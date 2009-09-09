@@ -1,6 +1,7 @@
 from __future__ import with_statement
 
 import os
+import urllib2
 import itertools
 from textwrap import dedent
 import pkg_resources
@@ -38,7 +39,7 @@ class SCAPITests(TestCase):
         self._load_config()
         assert pkg_resources.resource_exists("scapi.tests.test_connect", "knaster.mp3")
         self.data = pkg_resources.resource_stream("scapi.tests.test_connect", "knaster.mp3")
-
+        self.artwork_data = pkg_resources.resource_stream("scapi.tests.test_connect", "spam.jpg")
 
     CONFIGSPEC=dedent("""
     [api]
@@ -114,7 +115,6 @@ class SCAPITests(TestCase):
         self.USER = api.get('user', None)
         self.PASSWORD = api.get('password', None)
         self.AUTHENTICATOR = api.get("authenticator")
-        
 
         # reset the hard-coded values in the api
         if self.API_HOST:
@@ -196,14 +196,15 @@ class SCAPITests(TestCase):
         token, secret = sca.fetch_request_token()
         authorization_url = sca.get_request_token_authorization_url(token)
         webbrowser.open(authorization_url)
-        raw_input("please press return")
+        oauth_verifier = raw_input("please enter verifier code as seen in the browser:")
+        
         oauth_authenticator = scapi.authentication.OAuthAuthenticator(self.CONSUMER, 
                                                                       self.CONSUMER_SECRET,
                                                                       token, 
                                                                       secret)
 
         sca = scapi.ApiConnector(self.API_HOST, authenticator=oauth_authenticator)
-        token, secret = sca.fetch_access_token()
+        token, secret = sca.fetch_access_token(oauth_verifier)
         logger.info("Access token: '%s'", token)
         logger.info("Access token secret: '%s'", secret)
         # force oauth-authentication with the new parameters, and
@@ -356,6 +357,22 @@ class SCAPITests(TestCase):
         assert len(all_tracks) > scapi.ApiConnector.LIST_LIMIT
 
 
+
+    def test_filtered_list(self):
+        sca = self.root
+
+        tracks = list(sca.tracks(params={
+            "bpm[from]" : "180",
+            }))
+        if len(tracks) < scapi.ApiConnector.LIST_LIMIT:
+            for i in xrange(scapi.ApiConnector.LIST_LIMIT):
+                sca.Track.new(title='test_track_%i' % i, asset_data=self.data)
+        all_tracks = sca.tracks()
+        assert not isinstance(all_tracks, list)
+        all_tracks = list(all_tracks)
+        assert len(all_tracks) > scapi.ApiConnector.LIST_LIMIT
+
+
     def test_events(self):
         events = list(self.root.events())
         assert isinstance(events, list)
@@ -392,3 +409,129 @@ class SCAPITests(TestCase):
                 #print user.tracks()
             print playlist.user
             break
+
+
+
+
+    def test_playlist_creation(self):
+        sca = self.root
+        sca.Playlist.new(title="I'm so happy, happy, happy, happy!")
+        
+
+
+    def test_groups(self):
+        sca = self.root
+        groups = list(itertools.islice(sca.groups(), 0, 127))
+        for group in groups:
+            users = group.users()
+            for user in users:
+                pass
+
+
+    def test_track_creation_with_email_sharers(self):
+        sca = self.root
+        emails = [dict(address="deets@web.de"), dict(address="hannes@soundcloud.com")]
+        track = sca.Track.new(title='bar', asset_data=self.data,
+                              shared_to=dict(emails=emails)
+                              )
+        assert isinstance(track, scapi.Track)
+
+
+
+    def test_track_creation_with_artwork(self):
+        sca = self.root
+        track = sca.Track.new(title='bar',
+                              asset_data=self.data,
+                              artwork_data=self.artwork_data,
+                              )
+        assert isinstance(track, scapi.Track)
+
+        track.title = "foobarbaz"
+        
+
+
+    def test_oauth_get_signing(self):
+        sca = self.root
+
+        url = "http://api.soundcloud.dev/oauth/test_request"
+        params = dict(foo="bar",
+                      baz="padamm",
+                      )
+        url += sca._create_query_string(params)
+        signed_url = sca.oauth_sign_get_request(url)
+
+        
+        res = urllib2.urlopen(signed_url).read()
+        assert "oauth_nonce" in res
+
+
+    def test_streaming(self):
+        sca = self.root
+
+        track = sca.tracks(params={
+            "filter" : "streamable",
+            }).next()
+
+        
+        assert isinstance(track, scapi.Track)
+
+        stream_url = track.stream_url
+
+        signed_url = track.oauth_sign_get_request(stream_url)
+
+        
+    def test_downloadable(self):
+        sca = self.root
+
+        track = sca.tracks(params={
+            "filter" : "downloadable",
+            }).next()
+
+        
+        assert isinstance(track, scapi.Track)
+
+        download_url = track.download_url
+
+        signed_url = track.oauth_sign_get_request(download_url)
+
+        data = urllib2.urlopen(signed_url).read()
+        assert data
+
+
+
+    def test_modifying_playlists(self):
+        sca = self.root
+
+        me = sca.me()
+        my_tracks = list(me.tracks())
+
+        assert my_tracks
+
+        playlist = me.playlists().next()
+        playlist = sca.Playlist.get(playlist.id)
+
+        assert isinstance(playlist, scapi.Playlist)
+
+        pl_tracks = playlist.tracks
+
+        playlist.title = "foobarbaz"
+
+
+
+    def test_track_deletion(self):
+        sca = self.root
+        track = sca.Track.new(title='bar', asset_data=self.data,
+                              )
+
+        sca.tracks.remove(track)
+
+        
+
+    def test_track_creation_with_updated_artwork(self):
+        sca = self.root
+        track = sca.Track.new(title='bar',
+                              asset_data=self.data,
+                              )
+        assert isinstance(track, scapi.Track)
+
+        track.artwork_data = self.artwork_data

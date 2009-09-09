@@ -60,7 +60,7 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class RESTBase</h1><span class="codelink"><a href="scapi-pysrc.html#RESTBase">source&nbsp;code</a></span><br /><br />
+<h1 class="epydoc">Class RESTBase</h1><p class="nomargin-top"><span class="codelink"><a href="scapi-pysrc.html#RESTBase">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
@@ -69,15 +69,12 @@ object --+
 
 <dl><dt>Known Subclasses:</dt>
 <dd>
-    <a href="scapi.Asset-class.html">Asset</a>,
-    <a href="scapi.Comment-class.html">Comment</a>,
-    <a href="scapi.Event-class.html">Event</a>,
-    <a href="scapi.Track-class.html">Track</a>,
-    <a href="scapi.User-class.html">User</a>
+      <ul class="subclass-list">
+<li><a href="scapi.Comment-class.html">Comment</a></li><li>, <a href="scapi.Event-class.html">Event</a></li><li>, <a href="scapi.Group-class.html">Group</a></li><li>, <a href="scapi.Playlist-class.html">Playlist</a></li><li>, <a href="scapi.Track-class.html">Track</a></li><li>, <a href="scapi.User-class.html">User</a></li>  </ul>
 </dd></dl>
 
 <hr />
-The baseclass for all our domain-objects/resources.<br /><br />
+<p>The baseclass for all our domain-objects/resources.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -106,8 +103,7 @@ The baseclass for all our domain-objects/resources.<br /><br />
         <span class="summary-sig-arg">data</span>,
         <span class="summary-sig-arg">scope</span>,
         <span class="summary-sig-arg">path_stack</span>=<span class="summary-sig-default">None</span>)</span><br />
-      x.__init__(...) initializes x; see x.__class__.__doc__ for 
-      signature</td>
+      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="scapi-pysrc.html#RESTBase.__init__">source&nbsp;code</a></span>
             
@@ -161,8 +157,7 @@ The baseclass for all our domain-objects/resources.<br /><br />
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a name="_as_arguments"></a><span class="summary-sig-name">_as_arguments</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Converts a resource to a argument-string the way Rails expects 
-      it.</td>
+      Converts a resource to a argument-string the way Rails expects it.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="scapi-pysrc.html#RESTBase._as_arguments">source&nbsp;code</a></span>
             
@@ -195,9 +190,8 @@ The baseclass for all our domain-objects/resources.<br /><br />
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.RESTBase-class.html#_scope" class="summary-sig-name">_scope</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Return the scope this resource lives in, which is the KIND and 
-      id</td>
+          <td><span class="summary-sig"><a href="scapi.RESTBase-class.html#_scope" class="summary-sig-name" onclick="show_private();">_scope</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the scope this resource lives in, which is the KIND and id</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="scapi-pysrc.html#RESTBase._scope">source&nbsp;code</a></span>
             
@@ -370,7 +364,7 @@ The baseclass for all our domain-objects/resources.<br /><br />
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.RESTBase-class.html#_singleton" class="summary-sig-name">_singleton</a>(<span class="summary-sig-arg">cls</span>)</span><br />
+          <td><span class="summary-sig"><a href="scapi.RESTBase-class.html#_singleton" class="summary-sig-name" onclick="show_private();">_singleton</a>(<span class="summary-sig-arg">cls</span>)</span><br />
       This method will take a resource name like &quot;users&quot; and 
       return the single-case, in the example &quot;user&quot;.</td>
           <td align="right" valign="top">
@@ -404,26 +398,27 @@ The baseclass for all our domain-objects/resources.<br /><br />
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.RESTBase-class.html#REGISTRY" class="summary-name">REGISTRY</a> = <code title="{'assets': &lt;class 'scapi.Asset'&gt;,
- 'comments': &lt;class 'scapi.Comment'&gt;,
+        <a href="scapi.RESTBase-class.html#REGISTRY" class="summary-name">REGISTRY</a> = <code title="{'comments': &lt;class 'scapi.Comment'&gt;,
  'contacts': &lt;class 'scapi.User'&gt;,
  'events': &lt;class 'scapi.Event'&gt;,
  'favorites': &lt;class 'scapi.Track'&gt;,
+ 'groups': &lt;class 'scapi.Group'&gt;,
  'me': &lt;class 'scapi.User'&gt;,
  'permissions': &lt;class 'scapi.User'&gt;,
- 'tracks': &lt;class 'scapi.Track'&gt;,
-..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">assets</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Asset'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">comments</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;clas<code class="variable-ellipsis">...</code></code>
+ 'playlists': &lt;class 'scapi.Playlist'&gt;,
+..."><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">comments</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">contacts</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.RESTBase-class.html#ALL_DOMAIN_CLASSES" class="summary-name">ALL_DOMAIN_CLASSES</a> = <code title="{'Asset': &lt;class 'scapi.Asset'&gt;,
- 'Comment': &lt;class 'scapi.Comment'&gt;,
+        <a href="scapi.RESTBase-class.html#ALL_DOMAIN_CLASSES" class="summary-name">ALL_DOMAIN_CLASSES</a> = <code title="{'Comment': &lt;class 'scapi.Comment'&gt;,
  'Event': &lt;class 'scapi.Event'&gt;,
+ 'Group': &lt;class 'scapi.Group'&gt;,
+ 'Playlist': &lt;class 'scapi.Playlist'&gt;,
  'Track': &lt;class 'scapi.Track'&gt;,
- 'User': &lt;class 'scapi.User'&gt;}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Asset</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Asset'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Comment</code><code class="variable-ellipsis">...</code></code>
+ 'User': &lt;class 'scapi.User'&gt;}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Comment</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">Eve</code><code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -500,13 +495,13 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  x.__init__(...) initializes x; see x.__class__.__doc__ for 
-  signature
+  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
+  signature</p>
   <dl class="fields">
     <dt>Overrides:
-      object.__init__
+        object.__init__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -526,17 +521,17 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.__setattr__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>This method is used to set a property, a resource or a list of 
   resources as property of the resource the method is invoked on.</p>
-  For example, to set a comment on a track, do
+  <p>For example, to set a comment on a track, do</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
 <span class="py-prompt">&gt;&gt;&gt; </span>track = scapi.Track.new(title=<span class="py-string">'bar'</span>, sharing=<span class="py-string">&quot;private&quot;</span>)
 <span class="py-prompt">&gt;&gt;&gt; </span>comment = scapi.Comment.create(body=<span class="py-string">&quot;This is the body of my comment&quot;</span>, timestamp=10)    
 <span class="py-prompt">&gt;&gt;&gt; </span>track.comments = comment</pre>
-  To set a list of users as permissions, do
+  <p>To set a list of users as permissions, do</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
 <span class="py-prompt">&gt;&gt;&gt; </span>me = sca.me()
@@ -544,7 +539,7 @@ The baseclass for all our domain-objects/resources.<br /><br />
 <span class="py-prompt">&gt;&gt;&gt; </span>users = sca.users()
 <span class="py-prompt">&gt;&gt;&gt; </span>users_to_set = [user  <span class="py-keyword">for</span> user <span class="py-keyword">in</span> users[:10] <span class="py-keyword">if</span> user != me]
 <span class="py-prompt">&gt;&gt;&gt; </span>track.permissions = users_to_set</pre>
-  And finally, to simply change the title of a track, do
+  <p>And finally, to simply change the title of a track, do</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
 <span class="py-prompt">&gt;&gt;&gt; </span>track = sca.Track.get(track_id)
@@ -553,13 +548,12 @@ The baseclass for all our domain-objects/resources.<br /><br />
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>name</code></strong> (str) - the property name</li>
-        <li><strong class="pname"><code>value</code></strong> (RESTBase | list&lt;RESTBase&gt; | basestring | long | int | 
-          float) - the property, resource or resources to set</li>
+        <li><strong class="pname"><code>value</code></strong> (RESTBase | list&lt;RESTBase&gt; | basestring | long | int | float) - the property, resource or resources to set</li>
     </ul></dd>
     <dt>Returns:</dt>
         <dd>None</dd>
     <dt>Overrides:
-      object.__setattr__
+        object.__setattr__
     </dt>
   </dl>
 </td></tr></table>
@@ -579,10 +573,10 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.create">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  This is a convenience-method for creating an object that will be 
-  passed as parameter - e.g. a comment. A usage would look like this:
+  <p>This is a convenience-method for creating an object that will be 
+  passed as parameter - e.g. a comment. A usage would look like this:</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
 <span class="py-prompt">&gt;&gt;&gt; </span>track = sca.Track.new(title=<span class="py-string">'bar'</span>, sharing=<span class="py-string">&quot;private&quot;</span>)
@@ -607,11 +601,11 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.new">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>Create a new resource inside a given Scope. The actual values are in 
   data.</p>
-  So for creating new resources, you have two options:
+  <p>So for creating new resources, you have two options:</p>
   <ul>
     <li>
       create an instance directly using the class:
@@ -632,7 +626,7 @@ The baseclass for all our domain-objects/resources.<br /><br />
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>args</code></strong> (tuple&lt;Scope&gt;[1]) - if not empty, a one-element tuple containing the Scope</li>
+        <li><strong class="pname"><code>scope</code></strong> (tuple&lt;Scope&gt;[1]) - if not empty, a one-element tuple containing the Scope</li>
         <li><strong class="pname"><code>data</code></strong> (dict) - the data</li>
     </ul></dd>
     <dt>Returns:</dt>
@@ -655,10 +649,10 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.get">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>Fetch a resource by id.</p>
-  Simply pass a known id as argument. For example
+  <p>Simply pass a known id as argument. For example</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
 <span class="py-prompt">&gt;&gt;&gt; </span>track = sca.Track.get(id)</pre>
@@ -678,9 +672,9 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase._scope">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  Return the scope this resource lives in, which is the KIND and id
+  <p>Return the scope this resource lives in, which is the KIND and id</p>
   <dl class="fields">
     <dt>Returns:</dt>
         <dd>&quot;&lt;KIND&gt;/&lt;id&gt;&quot;</dd>
@@ -700,11 +694,11 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase._singleton">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>This method will take a resource name like &quot;users&quot; and 
   return the single-case, in the example &quot;user&quot;.</p>
-  Currently, it's not very sophisticated, only strips a trailing s.
+  <p>Currently, it's not very sophisticated, only strips a trailing s.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -722,12 +716,12 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.__repr__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  repr(x)
+  <p>repr(x)</p>
   <dl class="fields">
     <dt>Overrides:
-      object.__repr__
+        object.__repr__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -746,12 +740,12 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.__hash__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  hash(x)
+  <p>hash(x)</p>
   <dl class="fields">
     <dt>Overrides:
-      object.__hash__
+        object.__hash__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -771,10 +765,10 @@ The baseclass for all our domain-objects/resources.<br /><br />
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#RESTBase.__eq__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>Test for equality.</p>
-  Resources are considered equal if the have the same kind and id.
+  <p>Resources are considered equal if the have the same kind and id.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -810,14 +804,14 @@ The baseclass for all our domain-objects/resources.<br /><br />
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">assets</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Asset'&gt;<code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">comments</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">,</code>
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">comments</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">contacts</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.User'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">events</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Event'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">favorites</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Track'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">groups</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Group'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">me</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.User'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">permissions</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.User'&gt;<code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">tracks</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Track'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">playlists</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Playlist'&gt;<code class="variable-op">,</code>
 <code class="variable-ellipsis">...</code>
 </pre></td></tr></table>
 </dd>
@@ -836,9 +830,10 @@ The baseclass for all our domain-objects/resources.<br /><br />
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Asset</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Asset'&gt;<code class="variable-op">,</code>
- <code class="variable-quote">'</code><code class="variable-string">Comment</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">,</code>
+<code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">Comment</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Comment'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">Event</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Event'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">Group</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Group'&gt;<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">Playlist</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Playlist'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">Track</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.Track'&gt;<code class="variable-op">,</code>
  <code class="variable-quote">'</code><code class="variable-string">User</code><code class="variable-quote">'</code><code class="variable-op">: </code>&lt;class 'scapi.User'&gt;<code class="variable-group">}</code>
 </pre></td></tr></table>
@@ -878,10 +873,11 @@ The baseclass for all our domain-objects/resources.<br /><br />
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0beta1 on Fri Apr 18 16:28:19 2008
+    Generated by Epydoc 3.0.1 on Thu Sep 10 00:58:49 2009
     </td>
     <td align="right" class="footer">
-      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
     </td>
   </tr>
 </table>
@@ -892,9 +888,8 @@ The baseclass for all our domain-objects/resources.<br /><br />
   // javascript is turned off then we want them to be
   // visible); but by default, we want to hide them.  So hide
   // them unless we have a cookie that says to show them.
-  checkCookie()
+  checkCookie();
   // -->
 </script>
-  
 </body>
 </html>

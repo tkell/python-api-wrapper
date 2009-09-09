@@ -59,7 +59,7 @@
   </tr>
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
-<h1 class="epydoc">Package scapi</h1><span class="codelink"><a href="scapi-pysrc.html">source&nbsp;code</a></span><br /><br />
+<h1 class="epydoc">Package scapi</h1><p class="nomargin-top"><span class="codelink"><a href="scapi-pysrc.html">source&nbsp;code</a></span></p>
 <!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -79,16 +79,18 @@
 </tr>
   <tr><td class="summary">
   <ul class="nomargin">
-    <li class="private"> <strong class="uidlink"><a href="scapi.authentication-module.html">scapi.authentication</a></strong>    </li>
+    <li class="private"> <strong class="uidlink"><a href="scapi.authentication-module.html" onclick="show_private();">scapi.authentication</a></strong>    </li>
     <li> <strong class="uidlink"><a href="scapi.config-module.html">scapi.config</a></strong>    </li>
     <li> <strong class="uidlink"><a href="scapi.json-module.html">scapi.json</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="scapi.multidict-module.html">scapi.multidict</a></strong>    </li>
     <li> <strong class="uidlink"><a href="scapi.tests-module.html">scapi.tests</a></strong>
     <ul>
+    <li> <strong class="uidlink"><a href="scapi.tests.scapi_tests-module.html">scapi.tests.scapi_tests</a></strong>    </li>
     <li> <strong class="uidlink"><a href="scapi.tests.test_connect-module.html">scapi.tests.test_connect</a></strong>    </li>
     <li> <strong class="uidlink"><a href="scapi.tests.test_oauth-module.html">scapi.tests.test_oauth</a></strong>    </li>
     </ul>
     </li>
-    <li class="private"> <strong class="uidlink"><a href="scapi.util-module.html">scapi.util</a></strong>    </li>
+    <li class="private"> <strong class="uidlink"><a href="scapi.util-module.html" onclick="show_private();">scapi.util</a></strong>    </li>
   </ul></td></tr>
 </table>
 
@@ -114,17 +116,9 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.ApiConnector-class.html" class="summary-name">ApiConnector</a><br />
+        <a href="scapi.ApiConnector-class.html" class="summary-name" onclick="show_private();">ApiConnector</a><br />
       The ApiConnector holds all the data necessary to authenticate 
         against the soundcloud-api.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="scapi.Asset-class.html" class="summary-name">Asset</a><br />
-      An asset domain object/resource.
     </td>
   </tr>
 <tr>
@@ -143,25 +137,41 @@
       A event domain object/resource.
     </td>
   </tr>
-<tr class="private">
+<tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.InvalidMethodException-class.html" class="summary-name">InvalidMethodException</a>
+        <a href="scapi.Group-class.html" class="summary-name">Group</a><br />
+      A group domain object/resource
     </td>
   </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.NoResultFromRequest-class.html" class="summary-name">NoResultFromRequest</a>
+        <a href="scapi.InvalidMethodException-class.html" class="summary-name" onclick="show_private();">InvalidMethodException</a>
     </td>
   </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.RESTBase-class.html" class="summary-name">RESTBase</a><br />
+        <a href="scapi.NoResultFromRequest-class.html" class="summary-name" onclick="show_private();">NoResultFromRequest</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="scapi.Playlist-class.html" class="summary-name">Playlist</a><br />
+      A playlist/set domain object/resource
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="scapi.RESTBase-class.html" class="summary-name" onclick="show_private();">RESTBase</a><br />
       The baseclass for all our domain-objects/resources.
     </td>
   </tr>
@@ -169,16 +179,16 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.SCRedirectHandler-class.html" class="summary-name">SCRedirectHandler</a><br />
-      A urllib2-Handler to deal with the redirects the RESTful API of 
-        SC uses.
+        <a href="scapi.SCRedirectHandler-class.html" class="summary-name" onclick="show_private();">SCRedirectHandler</a><br />
+      A urllib2-Handler to deal with the redirects the RESTful API of SC 
+        uses.
     </td>
   </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.Scope-class.html" class="summary-name">Scope</a><br />
+        <a href="scapi.Scope-class.html" class="summary-name" onclick="show_private();">Scope</a><br />
       The basic means to query and create resources.
     </td>
   </tr>
@@ -194,7 +204,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi.UnknownContentType-class.html" class="summary-name">UnknownContentType</a>
+        <a href="scapi.UnknownContentType-class.html" class="summary-name" onclick="show_private();">UnknownContentType</a>
     </td>
   </tr>
 <tr>
@@ -261,16 +271,16 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi-module.html#ACCESS_TOKEN_URL" class="summary-name">ACCESS_TOKEN_URL</a> = <code title="'http://api.soundcloud.dev:3000/oauth/access_token'"><code class="variable-quote">'</code><code class="variable-string">http://api.soundcloud.dev:3000/oauth/acces</code><code class="variable-ellipsis">...</code></code><br />
-      The url Soundcould offers to make users authorize a concrete 
-      request token.
+        <a href="scapi-module.html#ACCESS_TOKEN_URL" class="summary-name">ACCESS_TOKEN_URL</a> = <code title="'http://api.sandbox-soundcloud.com/oauth/access_token'"><code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/ac</code><code class="variable-ellipsis">...</code></code><br />
+      The url Soundcould offers to make users authorize a concrete request 
+      token.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="AUTHORIZATION_URL"></a><span class="summary-name">AUTHORIZATION_URL</span> = <code title="'http://soundcloud.dev:3000/oauth/authorize'"><code class="variable-quote">'</code><code class="variable-string">http://soundcloud.dev:3000/oauth/authorize</code><code class="variable-quote">'</code></code>
+        <a href="scapi-module.html#AUTHORIZATION_URL" class="summary-name">AUTHORIZATION_URL</a> = <code title="'http://api.sandbox-soundcloud.com/oauth/authorize'"><code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/a</code><code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -285,7 +295,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="scapi-module.html#REQUEST_TOKEN_URL" class="summary-name">REQUEST_TOKEN_URL</a> = <code title="'http://api.soundcloud.dev:3000/oauth/request_token'"><code class="variable-quote">'</code><code class="variable-string">http://api.soundcloud.dev:3000/oauth/requ</code><code class="variable-ellipsis">...</code></code><br />
+        <a href="scapi-module.html#REQUEST_TOKEN_URL" class="summary-name">REQUEST_TOKEN_URL</a> = <code title="'http://api.sandbox-soundcloud.com/oauth/request_token'"><code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/r</code><code class="variable-ellipsis">...</code></code><br />
       The url Soundcould offers to exchange access-tokens for 
       request-tokens.
     </td>
@@ -302,7 +312,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="logger"></a><span class="summary-name">logger</span> = <code title="logging.getLogger(__name__)">logging.getLogger(__name__)</code>
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="logging.getLogger(&quot;scapi&quot;)">logging.getLogger(&quot;scapi&quot;)</code>
     </td>
   </tr>
 </table>
@@ -330,14 +340,32 @@
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">ACCESS_TOKEN_URL</h3>
-  The url Soundcould offers to make users authorize a concrete request 
-  token.
+  <p>The url Soundcould offers to make users authorize a concrete request 
+  token.</p>
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">http://api.soundcloud.dev:3000/oauth/access_token</code><code class="variable-quote">'</code>
+<code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/access_token</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AUTHORIZATION_URL"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AUTHORIZATION_URL</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/authorize</code><code class="variable-quote">'</code>
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -349,14 +377,14 @@
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">REQUEST_TOKEN_URL</h3>
-  The url Soundcould offers to exchange access-tokens for 
-  request-tokens.
+  <p>The url Soundcould offers to exchange access-tokens for 
+  request-tokens.</p>
   <dl class="fields">
   </dl>
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-quote">'</code><code class="variable-string">http://api.soundcloud.dev:3000/oauth/request_token</code><code class="variable-quote">'</code>
+<code class="variable-quote">'</code><code class="variable-string">http://api.sandbox-soundcloud.com/oauth/request_token</code><code class="variable-quote">'</code>
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -394,10 +422,11 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0beta1 on Fri Apr 18 16:28:18 2008
+    Generated by Epydoc 3.0.1 on Thu Sep 10 00:58:49 2009
     </td>
     <td align="right" class="footer">
-      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
     </td>
   </tr>
 </table>
@@ -408,9 +437,8 @@
   // javascript is turned off then we want them to be
   // visible); but by default, we want to hide them.  So hide
   // them unless we have a cookie that says to show them.
-  checkCookie()
+  checkCookie();
   // -->
 </script>
-  
 </body>
 </html>

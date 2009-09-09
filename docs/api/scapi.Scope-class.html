@@ -60,7 +60,7 @@
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Scope</h1><span class="codelink"><a href="scapi-pysrc.html#Scope">source&nbsp;code</a></span><br /><br />
+<h1 class="epydoc">Class Scope</h1><p class="nomargin-top"><span class="codelink"><a href="scapi-pysrc.html#Scope">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
@@ -69,27 +69,28 @@ object --+
 
 <hr />
 <p>The basic means to query and create resources. The Scope uses the <a 
-  href="scapi.ApiConnector-class.html" class="link">ApiConnector</a> to 
-  create the proper URIs for querying or creating resources.</p>
+  href="scapi.ApiConnector-class.html" class="link" 
+  onclick="show_private();">ApiConnector</a> to create the proper URIs for 
+  querying or creating resources.</p>
   <p>For accessing resources from the root level, you explcitly create a 
-  Scope and pass it an <a href="scapi.ApiConnector-class.html" 
-  class="link">ApiConnector</a>-instance. Then you can query it or create 
-  new resources like this:</p>
-  Please not that all resources that are lists are returned as 
-  <b>generator</b>. So you need to either iterate over them, or call 
-  list(resources) on them.
+  Scope and pass it an <a href="scapi.ApiConnector-class.html" class="link"
+  onclick="show_private();">ApiConnector</a>-instance. Then you can query 
+  it or create new resources like this:</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>connector = scapi.ApiConnector(host=<span class="py-string">'host'</span>, user=<span class="py-string">'user'</span>, password=<span class="py-string">'password'</span>) <span class="py-comment"># initialize the API</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>scope = scapi.Scope(connector) <span class="py-comment"># get the root scope</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>users = list(scope.users())
 <span class="py-output">[&lt;scapi.User object at 0x12345&gt;, ...]</span></pre>
-  When accessing resources that belong to another resource, like 
-  contancts of a user, you access the parent's resource scope implicitly 
-  through the resource instance like this:
+  <p>Please not that all resources that are lists are returned as 
+  <b>generator</b>. So you need to either iterate over them, or call 
+  list(resources) on them.</p>
+  <p>When accessing resources that belong to another resource, like 
+  contacts of a user, you access the parent's resource scope implicitly 
+  through the resource instance like this:</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>user = scope.users().next()
 <span class="py-prompt">&gt;&gt;&gt; </span>list(user.contacts())
-<span class="py-output">[&lt;scapi.Contact object at 0x12345&gt;, ...]</span></pre><br /><br />
+<span class="py-output">[&lt;scapi.Contact object at 0x12345&gt;, ...]</span></pre>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -144,18 +145,39 @@ object --+
       
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="scapi.Scope-class.html#oauth_sign_get_request" class="summary-sig-name">oauth_sign_get_request</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>)</span><br />
+      This method will take an arbitrary url, and rewrite it so that the 
+      current authenticator's oauth-headers are appended as 
+      query-parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="scapi-pysrc.html#Scope.oauth_sign_get_request">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">urllib2.Request</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_create_request" class="summary-sig-name">_create_request</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_create_request" class="summary-sig-name" onclick="show_private();">_create_request</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">url</span>,
         <span class="summary-sig-arg">connector</span>,
         <span class="summary-sig-arg">parameters</span>,
         <span class="summary-sig-arg">queryparams</span>,
-        <span class="summary-sig-arg">alternate_http_method</span>=<span class="summary-sig-default">None</span>)</span><br />
+        <span class="summary-sig-arg">alternate_http_method</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">use_multipart</span>=<span class="summary-sig-default">False</span>)</span><br />
       This method returnes the urllib2.Request to perform the actual 
       HTTP-request.</td>
           <td align="right" valign="top">
@@ -173,7 +195,7 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_create_query_string" class="summary-sig-name">_create_query_string</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_create_query_string" class="summary-sig-name" onclick="show_private();">_create_query_string</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">queryparams</span>)</span><br />
       Small helpermethod to create the querystring from a dict.</td>
           <td align="right" valign="top">
@@ -191,7 +213,7 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_call" class="summary-sig-name">_call</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_call" class="summary-sig-name" onclick="show_private();">_call</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">method</span>,
         <span class="summary-sig-arg">*args</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span><br />
@@ -211,12 +233,12 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_map" class="summary-sig-name">_map</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="scapi.Scope-class.html#_map" class="summary-sig-name" onclick="show_private();">_map</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">res</span>,
         <span class="summary-sig-arg">method</span>,
         <span class="summary-sig-arg">continue_list_fetching</span>)</span><br />
-      This method will take the JSON-result of a HTTP-call and return 
-      our domain-objects.</td>
+      This method will take the JSON-result of a HTTP-call and return our 
+      domain-objects.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="scapi-pysrc.html#Scope._map">source&nbsp;code</a></span>
             
@@ -351,10 +373,10 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  Create the Scope. It can have a resource as scope, and possibly a 
-  parent-scope.
+  <p>Create the Scope. It can have a resource as scope, and possibly a 
+  parent-scope.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -363,8 +385,42 @@ object --+
         <li><strong class="pname"><code>parent</code></strong> (scapi.Scope) - the parent scope of this scope</li>
     </ul></dd>
     <dt>Overrides:
-      object.__init__
+        object.__init__
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="oauth_sign_get_request"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">oauth_sign_get_request</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">url</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="scapi-pysrc.html#Scope.oauth_sign_get_request">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method will take an arbitrary url, and rewrite it so that the 
+  current authenticator's oauth-headers are appended as 
+  query-parameters.</p>
+  <p>This is used in streaming and downloading, because those content isn't
+  served from the SoundCloud servers themselves.</p>
+  <p>A usage example would look like this:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>sca = scapi.Scope(connector)
+<span class="py-prompt">&gt;&gt;&gt; </span>track = sca.tracks(params={
+<span class="py-output">      &quot;filter&quot; : &quot;downloadable&quot;,</span>
+<span class="py-output">      }).next()</span></pre>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>download_url = track.download_url
+<span class="py-prompt">&gt;&gt;&gt; </span>signed_url = track.oauth_sign_get_request(download_url)
+<span class="py-prompt">&gt;&gt;&gt; </span>data = urllib2.urlopen(signed_url).read()</pre>
+  <dl class="fields">
   </dl>
 </td></tr></table>
 </div>
@@ -380,18 +436,19 @@ object --+
         <span class="sig-arg">connector</span>,
         <span class="sig-arg">parameters</span>,
         <span class="sig-arg">queryparams</span>,
-        <span class="sig-arg">alternate_http_method</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">alternate_http_method</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">use_multipart</span>=<span class="sig-default">False</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope._create_request">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>This method returnes the urllib2.Request to perform the actual 
   HTTP-request.</p>
-  We return a subclass that overload the get_method-method to return a 
+  <p>We return a subclass that overload the get_method-method to return a 
   custom method like &quot;PUT&quot;. Additionally, the request is enhanced
-  with the current authenticators authorization scheme headers.
+  with the current authenticators authorization scheme headers.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -419,9 +476,9 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope._create_query_string">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  Small helpermethod to create the querystring from a dict.
+  <p>Small helpermethod to create the querystring from a dict.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
@@ -448,11 +505,11 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope._call">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>The workhorse. It's complicated, convoluted and beyond understanding 
   of a mortal being.</p>
-  You have been warned.
+  <p>You have been warned.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -472,11 +529,11 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope._map">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>This method will take the JSON-result of a HTTP-call and return our 
   domain-objects.</p>
-  It's also deep magic, don't look.
+  <p>It's also deep magic, don't look.</p>
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -495,25 +552,28 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope.__getattr__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
   <p>Retrieve an API-method or a scoped domain-class.</p>
-  If the former, result is a callable that supports the following 
-  invocations:
+  <p>If the former, result is a callable that supports the following 
+  invocations:</p>
   <ul>
     <li>
-      calling (...), with possible arguments (positional/keyword), 
-      return the resulting resource or list of resources.
+      calling (...), with possible arguments (positional/keyword), return 
+      the resulting resource or list of resources. When calling, you can 
+      pass a keyword-argument <b>params</b>. This must be a dict or <a 
+      href="scapi.util.MultiDict-class.html" class="link">MultiDict</a> and
+      will be used to add additional query-get-parameters.
     </li>
     <li>
-      invoking append(resource) on it will PUT the resource, making it 
-      part of the current resource. Makes sense only if it's a collection 
-      of course.
+      invoking append(resource) on it will PUT the resource, making it part
+      of the current resource. Makes sense only if it's a collection of 
+      course.
     </li>
     <li>
-      <p>invoking remove(resource) on it will DELETE the resource from it's
-      container. Also only usable on collections.</p>
-      TODO: describe the latter
+      invoking remove(resource) on it will DELETE the resource from it's 
+      container. Also only usable on collections.
+      <p>TODO: describe the latter</p>
     </li>
   </ul>
   <dl class="fields">
@@ -533,12 +593,12 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope.__repr__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  repr(x)
+  <p>repr(x)</p>
   <dl class="fields">
     <dt>Overrides:
-      object.__repr__
+        object.__repr__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -557,12 +617,12 @@ object --+
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="scapi-pysrc.html#Scope.__str__">source&nbsp;code</a></span>&nbsp;
     </td>
-  </table>
+  </tr></table>
   
-  str(x)
+  <p>str(x)</p>
   <dl class="fields">
     <dt>Overrides:
-      object.__str__
+        object.__str__
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
@@ -600,10 +660,11 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0beta1 on Fri Apr 18 16:28:19 2008
+    Generated by Epydoc 3.0.1 on Thu Sep 10 00:58:49 2009
     </td>
     <td align="right" class="footer">
-      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
     </td>
   </tr>
 </table>
@@ -614,9 +675,8 @@ object --+
   // javascript is turned off then we want them to be
   // visible); but by default, we want to hide them.  So hide
   // them unless we have a cookie that says to show them.
-  checkCookie()
+  checkCookie();
   // -->
 </script>
-  
 </body>
 </html>

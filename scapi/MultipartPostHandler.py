@@ -88,9 +88,12 @@ class MultipartPostHandler(urllib2.BaseHandler):
         if buffer is None:
             buffer = ''
         for(key, value) in vars:
-            buffer += '--%s\r\n' % boundary
-            buffer += 'Content-Disposition: form-data; name="%s"' % key
-            buffer += '\r\n\r\n' + value + '\r\n'
+            if isinstance(value, basestring):
+                value = [value]
+            for sub_value in value:
+                buffer += '--%s\r\n' % boundary
+                buffer += 'Content-Disposition: form-data; name="%s"' % key
+                buffer += '\r\n\r\n' + sub_value + '\r\n'
         for(key, fd) in files:
             file_size = os.fstat(fd.fileno())[stat.ST_SIZE]
             filename = fd.name.split('/')[-1]

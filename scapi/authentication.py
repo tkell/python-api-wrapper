@@ -140,7 +140,7 @@ class OAuthAuthenticator(object):
         random.seed()
 
 
-    def augment_request(self, req, parameters, use_multipart=False):
+    def augment_request(self, req, parameters, use_multipart=False, oauth_callback=None, oauth_verifier=None):
         oauth_parameters = {
             'oauth_consumer_key': self._consumer,
             'oauth_timestamp': self.generate_timestamp(),
@@ -152,6 +152,12 @@ class OAuthAuthenticator(object):
         if self._token is not None:
             oauth_parameters['oauth_token'] = self._token
 
+        if oauth_callback is not None:
+            oauth_parameters['oauth_callback'] = oauth_callback
+
+        if oauth_verifier is not None:
+            oauth_parameters['oauth_verifier'] = oauth_verifier
+            
         # in case we upload large files, we don't
         # sign the request over the parameters
         if use_multipart:
@@ -168,7 +174,7 @@ class OAuthAuthenticator(object):
         req.add_header(self.AUTHORIZATION_HEADER, "OAuth  %s" % to_header(oauth_parameters))
 
     def generate_timestamp(self):
-        return int(time.time() * 1000.0)
+        return int(time.time())# * 1000.0)
 
     def generate_nonce(self, length=8):
         return ''.join(str(random.randint(0, 9)) for i in range(length))
