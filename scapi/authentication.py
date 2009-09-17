@@ -142,11 +142,11 @@ class OAuthAuthenticator(object):
 
     def augment_request(self, req, parameters, use_multipart=False, oauth_callback=None, oauth_verifier=None):
         oauth_parameters = {
-            'oauth_consumer_key': self._consumer,
-            'oauth_timestamp': self.generate_timestamp(),
-            'oauth_nonce': self.generate_nonce(),
-            'oauth_version': self.OAUTH_API_VERSION,
-            'oauth_signature_method' : self._signature_method.get_name(),
+            'oauth_consumer_key':     self._consumer,
+            'oauth_timestamp':        self.generate_timestamp(),
+            'oauth_nonce':            self.generate_nonce(),
+            'oauth_version':          self.OAUTH_API_VERSION,
+            'oauth_signature_method': self._signature_method.get_name(),
             #'realm' : "http://soundcloud.com",
             }
         if self._token is not None:
@@ -160,7 +160,9 @@ class OAuthAuthenticator(object):
             
         # in case we upload large files, we don't
         # sign the request over the parameters
-        if use_multipart:
+        # There's a bug in the OAuth 1.0 (and a) specs that says that PUT request should omit parameters from the base string.
+        # This is fixed in the IETF draft, don't know when this will be released though. - HT
+        if use_multipart or req.get_method() == 'PUT':
             parameters = None
 
         oauth_parameters['oauth_signature'] = self._signature_method.build_signature(req, 

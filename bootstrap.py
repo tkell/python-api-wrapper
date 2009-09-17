@@ -2,7 +2,6 @@ import webbrowser
 
 import scapi
 
-
 # the host to connect to. Normally, this
 # would be api.soundcloud.com
 API_HOST = "api.sandbox-soundcloud.com"
@@ -43,7 +42,6 @@ oauth_authenticator = scapi.authentication.OAuthAuthenticator(CONSUMER,
 # we need a new connector with the new authenticator!
 connector = scapi.ApiConnector(API_HOST, authenticator=oauth_authenticator)
 token, secret = connector.fetch_access_token(oauth_verifier)
-
 
 # now we are finally ready to go - with all four parameters OAuth requires,
 # we can setup an authenticator that allows for actual API-calls.

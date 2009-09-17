@@ -33,7 +33,7 @@ class SCAPITests(TestCase):
     PASSWORD = None 
     AUTHENTICATOR = None 
     RUN_INTERACTIVE_TESTS = False
-
+    RUN_LONG_TESTS = False
     
     def setUp(self):
         self._load_config()
@@ -345,6 +345,9 @@ class SCAPITests(TestCase):
 
 
     def test_large_list(self):
+        if not self.RUN_LONG_TESTS:
+            return
+        
         sca = self.root
         
         tracks = list(sca.tracks())
@@ -359,8 +362,11 @@ class SCAPITests(TestCase):
 
 
     def test_filtered_list(self):
+        if not self.RUN_LONG_TESTS:
+            return
+        
         sca = self.root
-
+    
         tracks = list(sca.tracks(params={
             "bpm[from]" : "180",
             }))
@@ -420,6 +426,9 @@ class SCAPITests(TestCase):
 
 
     def test_groups(self):
+        if not self.RUN_LONG_TESTS:
+            return
+        
         sca = self.root
         groups = list(itertools.islice(sca.groups(), 0, 127))
         for group in groups:
@@ -508,7 +517,7 @@ class SCAPITests(TestCase):
         assert my_tracks
 
         playlist = me.playlists().next()
-        playlist = sca.Playlist.get(playlist.id)
+        # playlist = sca.Playlist.get(playlist.id)
 
         assert isinstance(playlist, scapi.Playlist)
 
@@ -535,3 +544,20 @@ class SCAPITests(TestCase):
         assert isinstance(track, scapi.Track)
 
         track.artwork_data = self.artwork_data
+
+    def test_update_own_description(self):
+        sca = self.root
+        me = sca.me()
+        
+        new_description = "This is my new description"
+        old_description = "This is my old description"
+        
+        if me.description == new_description:
+          change_to_description = old_description
+        else:
+          change_to_description = new_description
+        
+        me.description = change_to_description
+        
+        user = sca.User.get(me.id)
+        assert user.description == change_to_description
