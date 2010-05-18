@@ -616,10 +616,16 @@ class Scope(object):
                 """
                 If the current scope is 
                 """
-                self._call(_name, str(resource.id), _alternate_http_method="PUT")
+                try:
+                  self._call(_name, str(resource.id), _alternate_http_method="PUT")
+                except AttributeError:
+                  self._call(_name, str(resource), _alternate_http_method="PUT")
 
             def remove(selfish, resource):
+              try:
                 self._call(_name, str(resource.id), _alternate_http_method="DELETE")
+              except AttributeError:
+                self._call(_name, str(resource), _alternate_http_method="DELETE")
                 
         if _name in RESTBase.ALL_DOMAIN_CLASSES:
             cls = RESTBase.ALL_DOMAIN_CLASSES[_name]
