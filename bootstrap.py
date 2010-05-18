@@ -1,5 +1,4 @@
 import webbrowser
-
 import scapi
 
 # the host to connect to. Normally, this

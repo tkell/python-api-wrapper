@@ -43,21 +43,14 @@ Something like http://127.0.0.1:10000/
 PROXY = ''
 
 
+"""
+Endpoints, for reference:  
+The url Soundcould offers to obtain request-tokens: 'http://api.soundcloud.com/oauth/request_token'
+The url Soundcould offers to exchange access-tokens for request-tokens:  'http://api.soundcloud.com/oauth/access_token'
+The url Soundcould offers to make users authorize a concrete request token:  'http://api.soundcloud.com/oauth/authorize'
+"""
 
-"""
-The url Soundcould offers to obtain request-tokens
-"""
-REQUEST_TOKEN_URL = 'http://api.sandbox-soundcloud.com/oauth/request_token'
-"""
-The url Soundcould offers to exchange access-tokens for request-tokens.
-"""
-ACCESS_TOKEN_URL = 'http://api.sandbox-soundcloud.com/oauth/access_token'
-"""
-The url Soundcould offers to make users authorize a concrete request token.
-"""
-AUTHORIZATION_URL = 'http://api.sandbox-soundcloud.com/oauth/authorize'
-
-__all__ = ['SoundCloudAPI', 'USE_PROXY', 'PROXY', 'REQUEST_TOKEN_URL', 'ACCESS_TOKEN_URL', 'AUTHORIZATION_URL']
+__all__ = ['SoundCloudAPI', 'USE_PROXY', 'PROXY']
 
 
 class NoResultFromRequest(Exception):
@@ -129,6 +122,9 @@ class ApiConnector(object):
         @param authenticator: the authenticator to use, see L{scapi.authentication}
         """
         self.host = host
+        self.host = self.host.replace("http://", "")
+        self.host = self.host.replace("/", "")
+        
         if authenticator is not None:
             self.authenticator = authenticator
         elif user is not None and password is not None:
@@ -173,8 +169,9 @@ class ApiConnector(object):
 
         Please note the None passed as  token & secret to the authenticator.
         """
+        request_url = "http://" + self.host + "/oauth/request_token"
         if url is None:
-            url = REQUEST_TOKEN_URL
+            url = request_url
         req = urllib2.Request(url)
         self.authenticator.augment_request(req, None, oauth_callback=oauth_callback, oauth_verifier=oauth_verifier)
         handlers = []
@@ -207,7 +204,8 @@ class ApiConnector(object):
 
         Please note the values passed as token & secret to the authenticator.
         """
-        return self.fetch_request_token(ACCESS_TOKEN_URL, oauth_verifier=oauth_verifier)
+        access_token_url = "http://" + self.host + "/oauth/access_token"
+        return self.fetch_request_token(access_token_url, oauth_verifier=oauth_verifier)
     
 
     def get_request_token_authorization_url(self, token):
@@ -224,7 +222,9 @@ class ApiConnector(object):
         >>> authorization_url = sca.get_request_token_authorization_url(token)
         >>> webbrowser.open(authorization_url)
         """
-        return "%s?oauth_token=%s" % (AUTHORIZATION_URL, token)
+        
+        auth_url = "http://" + self.host + "/oauth/authorize"
+        return "%s?oauth_token=%s" % (auth_url, token)
 
 
  

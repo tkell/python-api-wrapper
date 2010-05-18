@@ -7,7 +7,7 @@ import oauth.oauth as oauth
 import webbrowser
 from scapi import util
 
-SERVER = 'sandbox-soundcloud.com'
+SERVER = 'sandbox-soundcloud.com' # Change to soundcloud.com to reach the live site
 PORT = 80
 
 REQUEST_TOKEN_URL = 'http://api.' + SERVER + '/oauth/request_token'
