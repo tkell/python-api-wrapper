@@ -133,7 +133,9 @@ class OAuthAuthenticator(object):
     OAUTH_API_VERSION = '1.0'
     AUTHORIZATION_HEADER = "Authorization"
 
-    def __init__(self, consumer, consumer_secret, token, secret, signature_method=OAuthSignatureMethod_HMAC_SHA1()):
+    def __init__(self, consumer=None, consumer_secret=None, token=None, secret=None, signature_method=OAuthSignatureMethod_HMAC_SHA1()):
+        if consumer == None:
+          raise ValueError("The consumer key must be passed for all public requests; it may not be None")
         self._consumer, self._token, self._secret = consumer, token, secret
         self._consumer_secret = consumer_secret
         self._signature_method = signature_method
