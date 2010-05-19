@@ -224,6 +224,7 @@ class ApiConnector(object):
         """
         
         auth_url = "http://" + self.host + "/oauth/authorize"
+        auth_url = auth_url.replace("api.", "")
         return "%s?oauth_token=%s" % (auth_url, token)
 
 
