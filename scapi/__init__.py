@@ -20,6 +20,7 @@
 
 import urllib
 import urllib2
+import re
 
 import logging
 import simplejson
@@ -81,6 +82,32 @@ class UnknownContentType(Exception):
     def __str__(self):
         return str(self)
 
+class PartitionCollectionGenerator():
+  def __init__(self, scope, method, Gen, NextPartition):
+    self.NextPartition = NextPartition
+    self.Generator = Gen
+    self.Scope = scope
+    self.Method = method
+    
+  def __iter__(self):
+    return self.Generator
+  def next(self):
+    return self.Generator.next()  
+  def __call__(self, someParam):
+      self.someParam = someParam
+      for line in self.content:
+          if line == someParam:
+            yield line
+            
+  def GetNextPartition(self):
+    if self.NextPartition != None:
+        method = re.search('(^[a-z]+)', self.Method).group(0)
+        params = re.search('\?.+', self.NextPartition).group(0)
+        params = params.replace('u0026', '&')
+
+        return self.Scope._call(method, params)
+    else:
+        return None
 
 class ApiConnector(object):
     """
@@ -123,7 +150,8 @@ class ApiConnector(object):
         """
         self.host = host
         self.host = self.host.replace("http://", "")
-        self.host = self.host.replace("/", "")
+        if self.host[-1] == '/': # Remove a trailing slash, but leave other slashes alone
+          self.host = self.host[0:-1]
         
         if authenticator is not None:
             self.authenticator = authenticator
@@ -172,7 +200,7 @@ class ApiConnector(object):
         request_url = "http://" + self.host + "/oauth/request_token"
         if url is None:
             url = request_url
-        req = urllib2.Request(url)
+        req = urllib2.Request(url)        
         self.authenticator.augment_request(req, None, oauth_callback=oauth_callback, oauth_verifier=oauth_verifier)
         handlers = []
         if USE_PROXY:
@@ -223,7 +251,8 @@ class ApiConnector(object):
         >>> webbrowser.open(authorization_url)
         """
         
-        auth_url = "http://" + self.host + "/oauth/authorize"
+        auth_url = self.host.split("/")[0]
+        auth_url = "http://" + auth_url + "/oauth/authorize"
         auth_url = auth_url.replace("api.", "")
         return "%s?oauth_token=%s" % (auth_url, token)
 
@@ -536,15 +565,22 @@ class Scope(object):
         try:
             if "application/json" in ct:
                 content = content.strip()
+                #If linked partitioning is on, extract the URL to the next collection:
+                partition_url = None
+                if method.find('linked_partitioning=1') != -1:  
+                  pattern = re.compile('(next_partition_href":")(.*?)(")')
+                  if pattern.search(content):
+                    partition_url = pattern.search(content).group(2)
+
                 if not content:
                     content = "{}"
                 try:
-                    res = simplejson.loads(content)
+                    res = simplejson.loads(content)                    
                 except:
                     logger.error("Couldn't decode returned json")
                     logger.error(content)
                     raise
-                res = self._map(res, method, continue_list_fetching)
+                res = self._map(res, method, continue_list_fetching, partition_url)
                 return res
             elif len(content) <= 1:
                 # this might be the famous SeeOtherSpecialCase which means that
@@ -554,7 +590,7 @@ class Scope(object):
         finally:
             handle.close()
 
-    def _map(self, res, method, continue_list_fetching):
+    def _map(self, res, method, continue_list_fetching, next_partition = None):
         """
         This method will take the JSON-result of a HTTP-call and return our domain-objects.
 
@@ -566,7 +602,7 @@ class Scope(object):
             stack.append(part)
             if part in RESTBase.REGISTRY:
                 cls = RESTBase.REGISTRY[part]
-                # multiple objects
+                # multiple objects, without linked partitioning
                 if isinstance(res, list):
                     def result_gen():
                         count = 0
@@ -576,7 +612,20 @@ class Scope(object):
                         if count == ApiConnector.LIST_LIMIT:
                             for item in continue_list_fetching():
                                 yield item
-                    return result_gen()
+                    logger.debug(res)
+                    return PartitionCollectionGenerator(self, method, result_gen(), next_partition)
+                # multiple objects, with linked partitioning
+                elif isinstance(res, dict) and res.has_key('next_partition_href'):
+                  def result_gen():
+                      count = 0
+                      for item in res['collection']:
+                          yield cls(item, self, stack)
+                          count += 1
+                      if count == ApiConnector.LIST_LIMIT:
+                          for item in continue_list_fetching():
+                              yield item
+                  logger.debug(res)
+                  return PartitionCollectionGenerator(self, method, result_gen(), next_partition) 
                 else:
                     return cls(res, self, stack)
         logger.debug("don't know how to handle result")
